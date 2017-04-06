@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html ng-app="myAPP">
+<head>
+    <meta charset="utf-8">
+    <title>Congress API</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/font-awesome.min.css" type="text/css">
+    <style type="text/css">
+        [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+            display: none !important;
+        }
+        .details12 .table
+        {
+            margin-bottom: 0 !important;
+        }
+        .table th
+        {
+            border-top:0 !important;
+            vertical-align: bottom !important;
+        }
+        .details12 .table th
+        {
+            border-top:0 !important;
+            vertical-align: top !important;
+        }
+        .table td
+        {
+            border-top:2px solid #ddd !important;
+        }
+        .list img 
+        {
+            width:28px;
+        }
+        .Senate img, .Joint img
+        {
+            width:22px;
+        }
+        #logo
+        {
+            font-size: 17px;
+            font-weight: bold;
+            margin-top: 13px;
+        }
+        a:focus
+        {
+            outline: none;
+        }
+        #leftNavi
+        {
+            font-size: 16px;
+            background-color: #373737;
+            padding: 0;
+        }
+        #leftNavi a, #leftNavi a:focus, #leftNavi a:hover, #leftNavi a:active, #leftNavi a:visited
+        {
+            outline: none;
+            color:#c8c8c8;
+            background-color: #373737;
+
+        }
+
+        .navbar-fixed-left 
+        {
+            width:180px;
+            position: fixed;
+            border-radius: 0;
+            height: 100%;
+            margin-top: 50px;
+            border: 0;
+        }
+        #content
+        {
+            margin-left:180px;
+        }
+        .borderStyle
+        {
+            background-color:#fff;
+        }
+
+        .line
+        {
+            height: 1px;
+            background-color: #373737; 
+            overflow: hidden;
+            margin: 0px 10px 0 10px;
+        }
+        .borderStyle
+        {
+            margin-top:20px;
+            border:1px solid #c4c4c4;
+            box-shadow:2px 2px 10px #c4c4c4;
+            border-radius: 5px;
+        }
+        .title
+        {
+            color: #606060;
+            font-weight: bold;
+        }
+        .nav li a
+        {
+            color: #D0D0D0;
+        }
+
+        .nav-tabs li.active a, .nav-tabs li.active a:focus, .nav-tabs li.active a:hover
+        {
+            border-color: #ddd;
+        }
+        .dispalyInfo
+        {
+            margin:25px !important;
+        }
+        #content .fa-star-o 
+        {
+            font-size:25px;
+        }
+        #content .fa-star 
+        {
+            font-size:25px;
+            color:yellow;
+            -webkit-text-stroke-width: 2px;
+            -webkit-text-stroke-color: #333;
+        }
+        .details12 table th, #legiDetails table td
+        {
+            border-top:1px solid #ddd !important;
+        }
+        #legiDetails .col-lg-6, #legiDetails .col-lg-12
+        {
+            padding: 0;
+        }
+        .socialLink img
+        {
+            width:50px !important;
+            margin-right: 5px !important;
+        }
+        #billDetails table th, #billDetails table td
+        {
+            border-top: 1px solid #ddd !important;
+        }
+        #billDetailRight
+        {
+            height: 450px;
+        }
+        #favorites .table th
+        {
+            padding: 8px;
+            vertical-align: bottom;
+        }
+        #favorites .table td
+        {
+            padding: 8px;
+            vertical-align: top;
+        }
+        @media screen and (max-width: 760px) {
+            .navbar-fixed-left 
+            {
+                width:14%;
+                position: fixed;
+                border-radius: 0;
+                height: 100%;
+                margin-top: 50px;
+                border:0;
+            }
+            #leftNavi ul
+            {
+                margin-left: 2px;
+                width:14%;
+            }
+            #leftNavi ul li
+            {
+                margin-bottom: 10px;
+            }
+            #content
+            {
+                margin-left:15%;
+
+            }
+            h1
+            {
+                margin-top: 75px;
+            }
+            .dispalyInfo
+            {
+                margin:0 !important;
+            }
+            .panel-body
+            {
+                padding-left: 10px !important;
+                padding-right: 10px !important;
+            }
+            .table-responsive
+            {
+                border:0 !important;
+            }
+            .panel-heading
+            {
+                height: 50px;
+            }
+            .title
+            {
+                width:30% !important;
+                margin:0 0 0 17px !important;
+            }
+
+            #bills .title
+            {
+                width: 50% !important;
+            } 
+            #favorites .title
+            {
+                width: 60% !important;
+            }
+            .form-inline
+            {
+                width: 40% !important;
+                float: right;
+            }
+            dir-pagination-controls
+            {
+                margin-left: 10px;
+            }
+            #legiDetails .col-xs-12
+            {
+                padding:0 5px 0 10px !important;
+            }
+            .details112 td
+            {
+                border-bottom: 1px solid #ddd !important;
+            }
+            #legiDetails .details12
+            {
+                padding:0 15px 0 25px !important;
+                margin-top:10px;
+            }
+            #legiDetails .details21
+            {
+                padding:0 15px 0 25px !important;
+            }
+            #legiDetails .details21 table
+            {
+                border: 1px solid #ddd !important;
+                margin-bottom: 0;
+            }
+            #legiDetails .details22
+            {
+                padding:0 15px 0 25px !important;
+            }
+            #legiDetails .details22 table
+            {
+                border: 1px solid #ddd !important;
+            }
+            caption
+            {
+                padding: 0;
+            }
+            #billDetailLeft, #billDetailRight
+            {
+                padding:10px 20px 0 25px !important;
+            }
+            #billDetailLeft table
+            {
+                margin-bottom:40px !important;
+            }
+        }
+    </style>
+
+</head>
+<body style="background-color:#f6f6f6">
+    <!-- <div class="container" style="padding:0;"> -->
+        <!-- <div class="panel-body" id="myTabs"> -->
+        <nav class="navbar navbar-default navbar-fixed-top" style="background-color:#fff">
+            <div id="taggleNavi" style="float: left;margin: 15px 0 0 15px;"><i class="fa fa-bars" aria-hidden="true"></i></div>
+            <div id="logo" class="text-center"><a href="http://sunlightfoundation.com/" target="_blank"><img src="./img/logo.png" style="width:76.8px; height: 24px;"></a> Congress API</div>
+        </nav>
+
+        <div id="leftNavi" class="navbar navbar-inverse navbar-fixed-left">
+            <ul class="nav navbar-nav" role="tablist">
+                <li role="presentation" style="margin-top: 20px"><a href="#legislators" aria-controls="legislators" role="tab" data-toggle="tab"><i class="fa fa-user" aria-hidden="true"></i> 
+                    <span class="visible-lg-inline visible-md-inline"> Legislators</span>
+                </a></li>
+                <li role="presentation"><a href="#bills" aria-controls="bills" role="tab" data-toggle="tab"><i class="fa fa-file-o" aria-hidden="true"></i> 
+                    <span class="visible-lg-inline visible-md-inline"> Bills</span>
+                </a></li>
+                <li role="presentation"><a href="#committees" aria-controls="committees" role="tab" data-toggle="tab"><i class="fa fa-sign-in" aria-hidden="true"></i>
+                <span class="visible-lg-inline visible-md-inline"> Committees</span>
+                </a></li>
+                <li role="presentation"><a href="#favorites" aria-controls="favorites" role="tab" data-toggle="tab"><i class="fa fa-star" aria-hidden="true"></i>
+                <span class="visible-lg-inline visible-md-inline"> Favorites</span>
+                </a></li>
+            </ul>
+        </div>
+
+        <!-- <div class="col-lg-10"> -->
+        <div id="content" class="container-fluid" style="background-color:#F6F6F6">
+        <div class="row">
+        <div  class="tab-content col-lg-12" style="margin-top:50px;padding:0;">
+            <div role="tabpanel" class="tab-pane active" id="legislators">
+                <div class="col-lg-12" >
+                    <h1>Legislators</h1>
+                    <div class="line"></div>
+                    <div class="borderStyle">
+                        <div id="legiCaro" class="carousel slide">
+                            <div class="carousel-inner">
+                                <div class="item active">
+                                    <ul class="nav nav-tabs">
+                                        <li class="nav active"><a  href="#byState" data-toggle="tab">By State</a></li>
+                                        <li class="nav"><a href="#byHouse" data-toggle="tab">House</a></li>
+                                        <li class="nav"><a href="#bySenate" data-toggle="tab">Senate</a></li>
+                                    </ul>
+                                    <div class="tab-content">
+
+                                        <div id="byState" class="tab-pane active">
+                                            <div ng-controller="legiState" class="">
+                                                <div class="panel panel-default dispalyInfo" style="margin: 0 25px 0 25px;">
+                                                    <div class="panel-heading" >
+                                                        <div class="title" style="float:left;margin:7.5px 0;">Legislators By State</div>
+                                                        <div class="text-right form-inline">
+                                                            <select class="form-control" ng-model="stateName">
+                                                                <option value>All States</option><option>Alabama</option><option>Alaska</option><option>Arizona</option><option>Arkansas</option><option>California</option><option>Colorado</option><option>Connecticut</option><option>Delaware</option><option value="District of Columbia">District Of Columbia</option><option>Florida</option><option>Georgia</option><option>Hawaii</option><option>Idaho</option><option>Illinois</option><option>Indiana</option><option>Iowa</option><option>Kansas</option><option>Kentucky</option><option>Louisiana</option><option>Maine</option><option>Maryland</option><option>Massachusetts</option><option>Michigan</option><option>Minnesota</option><option>Mississippi</option><option>Missouri</option><option>Montana</option><option>Nebraska</option><option>Nevada</option><option>New Hampshire</option><option>New Jersey</option><option>New Mexico</option><option>New York</option><option>North Carolina</option><option>North Dakota</option><option>Ohio</option><option>Oklahoma</option><option>Oregon</option><option>Pennsylvania</option><option>Rhode Island</option><option>South Carolina</option><option>South Dakota</option><option>Tennessee</option><option>Texas</option><option>Utah</option><option>Vermont</option><option>Virginia</option><option>Washington</option><option>West Virginia</option><option>Wisconsin</option><option>Wyoming</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="panel-body">
+                                                    <div class="table-responsive">
+                                                    <table class="table list">
+                                                        <tr><th width="17.5%">Party</th><th width="17.5%">Name</th><th width="17.5%">Chamber</th><th width="17.5%">District</th><th width="17.5%">State</th><th width="12.5%"></th></tr>
+                                                        <tr dir-paginate="item in legislators | filter:{state:stateName||undefined} | itemsPerPage: 10" current-page="currentPage" pagination-id="pageState" ng-cloak><td><img ng-src="{{item.party}}"></td><td>{{item.name}}</td><td class="{{item.chamber}}"><img ng-src="{{item.chamberImg}}"> {{item.chamber}}</td><td>{{item.district}}</td><td>{{item.state}}</td><td>
+                                                        <button id="{{item.bioguide_id}}" class="btn btn-primary details" style="margin:2px 0 0 0;"> View Details       
+                                                        </button></td></tr>
+                                                    </table>
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="text-center">
+                                                <dir-pagination-controls max-size="10" boundary-links="true" direction-links="true" pagination-id="pageState"></dir-pagination-controls>
+                                            </div>
+                                        </div>
+                                        <div id="byHouse" class="tab-pane">
+                                            <div ng-controller="legiHouse" class="">
+                                                <div class="panel panel-default dispalyInfo" style="margin: 0 25px 0 25px;">
+                                                    <div class="panel-heading" >
+                                                        <div class="title" style="float:left;margin:7.5px 0;">Legislators By House</div>
+                                                        <div class="text-right form-inline">
+                                                            <input class="form-control" ng-model="searchHouse" placeholder="Search">
+                                                        </div>
+                                                    </div>
+                                                    <div class="panel-body">
+                                                    <div class="table-responsive">
+                                                    <table class="table list">
+                                                        <tr><th width="17.5%">Party</th><th width="17.5%">Name</th><th width="17.5%">Chamber</th><th width="17.5%">District</th><th width="17.5%">State</th><th width="12.5%"></th></tr>
+                                                        <tr dir-paginate="house in legislatorsH | orderBy:'name' | filter:'House':true | filter:searchHouse | itemsPerPage: 10" current-page="currentPage1" pagination-id="pageHouse" ng-cloak><td><img ng-src="{{house.party}}"></td><td>{{house.name}}</td><td class="{{house.chamber}}"><img ng-src="{{house.chamberImg}}"> {{house.chamber}}</td><td>{{house.district}}</td><td>{{house.state}}</td><td>
+                                                        <button id="{{house.bioguide_id}}" class="btn btn-primary details" style="margin:2px 0 0 0;"> View Details      
+                                                        </button></td></tr>
+                                                    </table>
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="text-center">
+                                                <dir-pagination-controls bmax-size="10" boundary-links="true" direction-links="true" pagination-id="pageHouse"></dir-pagination-controls>
+                                            </div>
+                                        </div>                                  
+                                        <div id="bySenate" class="tab-pane">
+                                            <div ng-controller="legiSenate" class="">
+                                                <div class="panel panel-default dispalyInfo" style="margin: 0 25px 0 25px;">
+                                                    <div class="panel-heading" >
+                                                        <div class="title" style="float:left;margin:7.5px 0;">Legislators By Senate</div>
+                                                        <div class="text-right form-inline">
+                                                            <input class="form-control" ng-model="searchSenate" placeholder="Search">
+                                                        </div>
+                                                    </div>
+                                                    <div class="panel-body">
+                                                    <div class="table-responsive">
+                                                    <table class="table list">
+                                                        <tr><th width="20%">Party</th><th width="20%">Name</th><th width="20%">Chamber</th><th width="20%">State</th><th width="20%"></th></tr>
+                                                        <tr dir-paginate="senate in legislatorsS | orderBy:'name' | filter:'Senate':true | filter:searchSenate | itemsPerPage: 10" current-page="currentPage2" pagination-id="pageSenate" ng-cloak><td><img ng-src="{{senate.party}}"></td><td>{{senate.name}}</td><td class="{{senate.chamber}}"><img ng-src="{{senate.chamberImg}}"> {{senate.chamber}}</td><td>{{senate.state}}</td><td>
+                                                        <button id="{{senate.bioguide_id}}" class="btn btn-primary details" style="margin:2px 0 0 0;"> View Details     
+                                                        </button></td></tr>
+                                                    </table>
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="text-center">
+                                                <dir-pagination-controls max-size="10" boundary-links="true" direction-links="true" pagination-id="pageSenate"></dir-pagination-controls>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                                <div class="item">
+                                    <div style="margin:0;padding:13px 10px;border-bottom:1px solid #ddd;">
+                                        <button id="toLegiList" class="btn btn-default toList" style="margin:0px 0px 0;display: inline;">
+                                            <span class="glyphicon glyphicon-chevron-left"></span> 
+                                        </button>
+                                        <h3 style="display:inline;vertical-align:middle;">Details</h3>
+                                        <button id="legiFavorite" class="btn btn-default" style="float: right;">
+                                            <i class="fa fa-star-o" aria-hidden="true" ></i>
+                                        </button>
+                                    </div>
+                                    <div>
+                                    <div id="legiDetails" class="row">
+                                        <div class="col-lg-6 col-xs-12" style="margin-top: 10px;padding:0 15px 0 35px;">
+
+                                            <div class="col-lg-12 col-xs-12 details11">
+                                                <table class="table" style="margin-bottom:0;"><tr><td>
+                                                    <div class="col-lg-6 col-xs-12 details111 text-center"></div>
+                                                    <div class="col-lg-6 col-xs-12 details112"></div>
+                                                </td></tr></table>
+                                            </div>
+
+                                            <div class="col-lg-12 col-xs-12 details12"></div>
+                                        </div>
+                                        <div class="col-lg-6 col-xs-12" style="padding:0 35px 0 15px;">
+                                            <div class="col-lg-12 col-xs-12 details21"></div>
+                                            <div class="col-lg-12 col-xs-12 details22"></div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="bills">
+                <div class="col-lg-12" >
+                    <h1>Bills</h1>
+                    <div class="line"></div>
+                    <div class="borderStyle">
+                        <div id="billCaro" class="carousel slide">
+                            <div class="carousel-inner">
+                                <div class="item active">
+                                    <ul class="nav nav-tabs">
+                                        <li class="nav active"><a href="#activeBills" data-toggle="tab">Active Bills</a></li>
+                                        <li class="nav"><a href="#newBills" data-toggle="tab">New Bills</a></li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div id="activeBills" class="tab-pane active">
+                                            <div ng-controller="billActive" class="">
+                                                <div class="panel panel-default dispalyInfo" style="margin: 0 25px 0 25px;">
+                                                    <div class="panel-heading" >
+                                                        <div class="title" style="float:left;margin:7.5px 0;">Active Bills</div>
+                                                        <div class="text-right form-inline">
+                                                            <input class="form-control" ng-model="searchActive" placeholder="Search">
+                                                        </div>
+                                                    </div>
+                                                    <div class="panel-body">
+                                                    <div class="table-responsive">
+                                                    <table class="table list">
+                                                        <tr><th width="14.5%">Bill ID</th><th width="9%">Bill Type</th><th width="20%" class='hidden-xs hidden-sm'>Title</th><th width="10%">Chamber</th><th width="15%">Introducted On</th><th width="18.5%">Sponsor</th><th width="13%"></th></tr>
+                                                        <tr dir-paginate="elem in billsActive | filter:searchActive | itemsPerPage: 10" current-page="currentPage3" pagination-id="pageActive" ng-cloak><td>{{elem.bill_id}}</td><td>{{elem.type}}</td><td  class='hidden-xs hidden-sm'>{{elem.title}}</td><td class="{{elem.chamber}}"><img ng-src="{{elem.chamberImg}}"> {{elem.chamber}}</td><td>{{elem.introduced_on}}</td><td>{{elem.sponsor}}</td><td>
+                                                        <button id="{{elem.detail}}" class="btn btn-primary details" style="margin:2px 0 0 0;"> View Details        
+                                                        </button></td></tr>
+                                                    </table>
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="text-center">
+                                                <dir-pagination-controls max-size="10" boundary-links="true" direction-links="true" pagination-id="pageActive"></dir-pagination-controls>
+                                            </div>
+                                        </div>
+                                        <div id="newBills" class="tab-pane">
+                                            <div ng-controller="billNew" class="">
+                                                <div class="panel panel-default dispalyInfo" style="margin: 0 25px 0 25px;">
+                                                    <div class="panel-heading" >
+                                                        <div class="title" style="float:left;margin:7.5px 0;">New Bills</div>
+                                                        <div class="text-right form-inline">
+                                                            <input class="form-control" ng-model="searchNew" placeholder="Search">
+                                                        </div>
+                                                    </div>
+                                                    <div class="panel-body">
+                                                    <div class="table-responsive">
+                                                    <table class="table list">
+                                                        <tr><th width="14.5%">Bill ID</th><th width="9%">Bill Type</th><th width="20%" class='hidden-xs hidden-sm'>Title</th><th width="10%">Chamber</th><th width="15%">Introducted On</th><th width="18.5%">Sponsor</th><th width="13%"></th></tr>
+                                                        <tr dir-paginate="elemNew in billsNew | filter:searchNew | itemsPerPage: 10" current-page="currentPage4" pagination-id="pageNew" ng-cloak><td>{{elemNew.bill_id}}</td><td>{{elemNew.type}}</td><td class='hidden-xs hidden-sm'>{{elemNew.title}}</td><td class="{{elemNew.chamber}}"><img ng-src="{{elemNew.chamberImg}}"> {{elemNew.chamber}}</td><td>{{elemNew.introduced_on}}</td><td>{{elemNew.sponsor}}</td><td>
+                                                        <button id="{{elemNew.detail}}" class="btn btn-primary details" style="margin:2px 0 0 0;"> View Details     
+                                                        </button></td></tr>
+                                                    </table>
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="text-center">
+                                                <dir-pagination-controls max-size="10" boundary-links="true" direction-links="true" pagination-id="pageNew"></dir-pagination-controls>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div style="margin:0;padding:13px 10px;border-bottom:1px solid #ddd;">
+                                        <button id="toBillList" class="btn btn-default toList" style="margin:0px 0px 0;display: inline;">
+                                            <span class="glyphicon glyphicon-chevron-left"></span> 
+                                        </button>
+                                        <h3 style="display:inline;vertical-align:middle;">Details</h3>
+                                        <button id="billFavorite" class="btn btn-default" style="float: right;">
+                                            <i class="fa fa-star-o" aria-hidden="true" ></i>
+                                        </button>
+                                    </div>
+                                    <div>
+                                    <div id="billDetails" class="row">
+                                        <div id="billDetailLeft" class="col-lg-6 col-xs-12" style="padding:10px 0 0 25px;"></div>
+                                        <div id="billDetailRight" class="col-lg-6 col-xs-12" style="padding:10px 25px 0 0;"></div>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="committees">
+                <div class="col-lg-12" >
+                    <h1>Committees</h1>
+                    <div class="line"></div>
+                    <div class="borderStyle">
+                        <ul class="nav nav-tabs">
+                            <li class="nav active"><a href="#houseComm" data-toggle="tab">House</a></li>
+                            <li class="nav"><a href="#senateComm" data-toggle="tab">Senate</a></li>
+                            <li class="nav"><a href="#jointComm" data-toggle="tab">Joint</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div id="houseComm" class="tab-pane active">        
+                                <div ng-controller="commHouse" class="">
+                                    <div class="panel panel-default dispalyInfo" style="margin: 0 25px 0 25px;">
+                                        <div class="panel-heading" >
+                                            <div class="title" style="float:left;margin:7.5px 0;">House</div>
+                                            <div class="text-right form-inline">
+                                                <input class="form-control" ng-model="searchCommH" placeholder="Search">
+                                            </div>
+                                        </div>
+                                        <div class="panel-body">
+                                        <div class="table-responsive">
+                                        <table class="table list">
+                                            <tr><th width="7.5%"></th><th width="9.5%">Chamber</th><th width="10.5%">Committee ID</th><th width="46%">Name</th><th width="12%">Parent Committee</th><th width="8.5%">Contact</th><th width="6%">Office</th></tr>
+                                            <tr dir-paginate="elemHouse in comHouse | filter:'House':true | filter:searchCommH | itemsPerPage: 10" current-page="currentPage5" pagination-id="pageCommH" ng-cloak><td><button id="{{elemHouse.chamberImg}} _{{elemHouse.chamber}}_{{elemHouse.committee_id}}_{{elemHouse.name}}_{{elemHouse.parent_comm}}_{{elemHouse.sub_comm}}" class="btn btn-default commFavo" style="float: left;"><i class="fa {{elemHouse.ico}}" aria-hidden="true" ></i></button></td><td class="{{elemHouse.chamber}}"><img ng-src="{{elemHouse.chamberImg}}"> {{elemHouse.chamber}}</td><td>{{elemHouse.committee_id}}</td><td>{{elemHouse.name}}</td><td>{{elemHouse.parent_comm}}</td><td>{{elemHouse.contact}}</td><td>{{elemHouse.office}}</td></tr>
+                                        </table>
+                                        </div>
+                                        </div>
+                                    </div>
+                                
+                                <div class="text-center">
+                                    <dir-pagination-controls  on-page-change="pageChanged()" max-size="10" boundary-links="true" direction-links="true" pagination-id="pageCommH" ></dir-pagination-controls>
+                                </div>
+                                </div>
+                            </div>
+                            <div id="senateComm" class="tab-pane">
+                                <div ng-controller="commSenate" class="">
+                                    <div class="panel panel-default dispalyInfo" style="margin: 0 25px 0 25px;">
+                                        <div class="panel-heading" >
+                                            <div class="title" style="float:left;margin:7.5px 0;">Senate</div>
+                                            <div class="text-right form-inline">
+                                                <input class="form-control" ng-model="searchCommS" placeholder="Search">
+                                            </div>
+                                        </div>
+                                        <div class="panel-body">
+                                        <div class="table-responsive">
+                                        <table class="table list">
+                                            <tr><th width="7.5%"></th><th width="9%">Chamber</th><th width="11%">Committee ID</th><th width="62%">Name</th><th width="10..5%">Parent Committee</th></tr>
+                                            <tr dir-paginate="elemSenate in comSenate | filter:'Senate':true | filter:searchCommS | itemsPerPage: 10" current-page="currentPage6" pagination-id="pageCommS" ng-cloak><td><button id="{{elemSenate.chamberImg}} _{{elemSenate.chamber}}_{{elemSenate.committee_id}}_{{elemSenate.name}}_{{elemSenate.parent_comm}}_{{elemSenate.sub_comm}}" class="btn btn-default commFavo" style="float: left;"><i class="fa {{elemSenate.ico}}" aria-hidden="true" ></i></button></td><td class="{{elemSenate.chamber}}"><img ng-src="{{elemSenate.chamberImg}}"> {{elemSenate.chamber}}</td><td>{{elemSenate.committee_id}}</td><td>{{elemSenate.name}}</td><td>{{elemSenate.parent_comm}}</td></tr>
+                                        </table>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <dir-pagination-controls  on-page-change="pageChanged()" max-size="10" boundary-links="true" direction-links="true" pagination-id="pageCommS"></dir-pagination-controls>
+                                </div>
+                            </div>
+                            <div id="jointComm" class="tab-pane">
+                                <div ng-controller="commJoint" class="">
+                                    <div class="panel panel-default dispalyInfo" style="margin: 0 25px 0 25px;">
+                                        <div class="panel-heading" >
+                                            <div class="title" style="float:left;margin:7.5px 0;">Joint</div>
+                                            <div class="text-right form-inline">
+                                                <input class="form-control" ng-model="searchCommJ" placeholder="Search">
+                                            </div>
+                                        </div>
+                                        <div class="panel-body">
+                                        <div class="table-responsive">
+                                        <table class="table list">
+                                            <tr><th width="11%"></th><th width="13%">Chamber</th><th width="19.5%">Committee ID</th><th width="56.5%">Name</th></tr>
+                                            <tr dir-paginate="elemJoint in comJoint | filter:'Joint':true | filter:searchCommJ | itemsPerPage: 10" current-page="currentPage7" pagination-id="pageCommJ" ng-cloak><td><button id="{{elemJoint.chamberImg}} _{{elemJoint.chamber}}_{{elemJoint.committee_id}}_{{elemJoint.name}}_{{elemJoint.parent_comm}}_{{elemJoint.sub_comm}}" class="btn btn-default commFavo" style="float: left;"><i class="fa fa-star-o" aria-hidden="true" ></i></button></td><td class="{{elemJoint.chamber}}"><img ng-src="{{elemJoint.chamberImg}}"> {{elemJoint.chamber}}</td><td>{{elemJoint.committee_id}}</td><td>{{elemJoint.name}}</td></tr>
+                                        </table>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <dir-pagination-controls max-size="10" boundary-links="true" direction-links="true" pagination-id="pageCommJ"></dir-pagination-controls>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="favorites">
+                <div class="col-lg-12" >
+                    <h1>Favorites</h1>
+                    <div class="line"></div>
+                    <div class="borderStyle">
+                    <ul class="nav nav-tabs">
+                        <li class="nav active"><a href="#byLegi" data-toggle="tab">Legislators</a></li>
+                        <li class="nav"><a href="#byBills" data-toggle="tab">Bills</a></li>
+                        <li class="nav"><a href="#byComm" data-toggle="tab">Committees</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div id="byLegi" class="tab-pane active">
+                            <div class="panel panel-default dispalyInfo" style="margin: 0 25px 0 25px;">
+                                <div class="panel-heading" >
+                                    <div class="title" style="margin:7.5px 0;">Favorite Legistors</div>
+                                </div>
+                                <div class="panel-body"><div class="table-responsive"><table id="legiFavoTable" class="table list">
+                                    <tr><th width="10.5%"></th><th width="10%">Image</th><th width="9.5%">Party</th><th width="12%">Name</th><th width="12%">Chamber</th><th width="8%">State</th><th width="26%">Email</th><th width="12%"></th></tr>
+                                </table></div></div>
+                            </div>
+                        </div>
+                        <div id="byBills" class="tab-pane">
+                            <div class="panel panel-default dispalyInfo" style="margin: 0 25px 0 25px;">
+                                <div class="panel-heading" >
+                                    <div class="title" style="margin:7.5px 0;">Favorite Bills</div>
+                                </div>
+                                <div class="panel-body"><div class="table-responsive"><table id="billFavoTable" class="table list">
+                                    <tr><th width="7%"></th><th width="11%">Bill ID</th><th width="9%">Bill Type</th><th width="20%">Title</th><th width="10%">Chamber</th><th width="15%">Introducted On</th><th width="15%">Sponsor</th><th width="13%"></th></tr>
+                                </table></div></div>
+                            </div>
+                        </div>
+                        <div id="byComm" class="tab-pane">
+                            <div class="panel panel-default dispalyInfo" style="margin: 0 25px 0 25px;">
+                                <div class="panel-heading" >
+                                    <div class="title" style="margin:7.5px 0;">Favorite Committees</div>
+                                </div>
+                                <div class="panel-body"><div class="table-responsive"><table id="commFavoTable" class="table list">
+                                    <tr><th width="7%"></th><th width="9%">Chamber</th><th width="10%">Committee ID</th><th width="51%">Name</th><th width="13%">Parent Committee</th><th width="10%">Sub Committee</th></tr>
+                                </table></div></div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        </div>
+    <!-- </div> -->
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+<script type="text/javascript" src="./js/dirPagination.js"></script>
+<script type="text/javascript">
+        
+    var app = angular.module("myAPP", ["angularUtils.directives.dirPagination"]);
+
+    app.factory("shareData", function($http, $sce) {
+        var promise;
+        var shareData = {
+            async: function() {
+                var url = "http://hwcsci571.rkhkam8tip.us-west-1.elasticbeanstalk.com/myCongressPageAPI_callback.php?type=legislators&flag=state&detail=no&callback=JSON_CALLBACK";
+                $sce.trustAsResourceUrl(url);
+                if (!promise) {
+                    promise = $http.jsonp(url, {jsonpCallbackParam: 'callback'}).success(function(response) {
+                        return response.data;
+                    });
+                }
+                return promise;         
+            }       
+        };
+        return shareData;
+    });
+    app.controller("legiState", function($scope, shareData) {
+        shareData.async().then(function(data) {
+            $scope.legislators = data.data;
+            $scope.currentPage = 1;
+        });
+    });
+    app.controller("legiHouse", function($scope, shareData) {
+        shareData.async().then(function(data) {
+            $scope.legislatorsH = data.data;
+            $scope.currentPage1 = 1;
+        });
+    });
+    app.controller("legiSenate", function($scope, shareData) {
+        shareData.async().then(function(data) {
+            $scope.legislatorsS = data.data;
+            $scope.currentPage2 = 1;
+        });
+    });
+
+    app.controller("billActive", function($scope, $http, $sce) {
+        var url = "http://hwcsci571.rkhkam8tip.us-west-1.elasticbeanstalk.com/myCongressPageAPI_callback.php?type=bills&flag=active&detail=no&callback=JSON_CALLBACK";
+        $sce.trustAsResourceUrl(url);
+        $http.jsonp(url, {jsonpCallbackParam: 'callback'}).success(function(response) {
+            $scope.billsActive = response;
+            $scope.currentPage3 = 1;
+        });
+    });
+    app.controller("billNew", function($scope, $http, $sce) {
+        var url = "http://hwcsci571.rkhkam8tip.us-west-1.elasticbeanstalk.com/myCongressPageAPI_callback.php?type=bills&flag=new&detail=no&callback=JSON_CALLBACK";
+        $sce.trustAsResourceUrl(url);
+        $http.jsonp(url, {jsonpCallbackParam: 'callback'}).success(function(response) {
+            $scope.billsNew = response;
+            $scope.currentPage4 = 1;
+        });
+    });
+
+    function displayFavoComm(scope) {   
+        if (scope) {
+            for (var i = 0; i < scope.length; i++) {
+                if (localStorage.getItem("comm_" + scope[i].committee_id)) {
+                    scope[i].ico = "fa-star";
+                }
+                else {
+                    scope[i].ico = "fa-star-o";
+                }               
+            }
+        }
+    }
+
+    app.factory("shareDataComm", function($http, $sce) {
+        var promise;
+        var shareData = {
+            async: function() {
+                var url = "http://hwcsci571.rkhkam8tip.us-west-1.elasticbeanstalk.com/myCongressPageAPI_callback.php?type=committees&flag=all&detail=no&callback=JSON_CALLBACK";
+                $sce.trustAsResourceUrl(url);
+                if (!promise) {
+                    promise = $http.jsonp(url, {jsonpCallbackParam: 'callback'}).success(function(response) {
+                        return response.data;
+                    });
+                }
+                return promise;         
+            }       
+        };
+        return shareData;
+    });
+    app.controller("commHouse", function($scope, shareDataComm) {
+        shareDataComm.async().then(function(data) {
+            $scope.comHouse = data.data;
+            $scope.currentPage5 = 1;
+            $scope.$watch('currentPage5', function(newPage){
+                displayFavoComm($scope.comHouse)
+            });
+        });
+    });
+    app.controller("commSenate", function($scope, shareDataComm) {
+        shareDataComm.async().then(function(data) {
+            $scope.comSenate = data.data;
+            $scope.currentPage6 = 1;
+            $scope.$watch('currentPage6', function(newPage){
+                displayFavoComm($scope.comSenate)
+            });
+        });     
+    });
+    app.controller("commJoint", function($scope, shareDataComm) {
+        shareDataComm.async().then(function(data) {
+            $scope.comJoint = data.data;
+            $scope.currentPage7 = 1;
+        });
+    });
+
+    $().ready(function() {
+        var localInfo;
+        var isMobile = window.matchMedia("only screen and (max-width: 760px)");
+        $("#taggleNavi").click(function() {
+            if ($("#leftNavi").is(":hidden")) {
+                $("#leftNavi").show();
+                if(isMobile.matches) {
+                    $("#content").css("margin-left", "15%");
+                } 
+                else {
+                    $("#content").css("margin-left", "180px");
+                }
+                
+            } 
+            else {
+                $("#leftNavi").hide();
+                $("#content").css("margin-left", "0px");
+            }
+        }); 
+
+        function displayDetails(idSearch) {
+            return $.ajax({
+                type: "GET",
+                url: "http://hwcsci571.rkhkam8tip.us-west-1.elasticbeanstalk.com/myCongressPageAPI_callback.php",
+                dataType: "jsonp",
+                data: {
+                    type: "legislators",
+                    flag: "details",
+                    detail: idSearch
+                }
+            }); 
+        }
+
+        function displayDetailsTable(response) {
+            var html = "<img src='https://theunitedstates.io/images/congress/225x275/" + response.bioguide_id +".jpg' style='width:165px;'>";
+            $(".details111").html(html);
+            html = "<table class='table' style='margin-bottom:0;'><tr><td>";
+            html += response.fullName + "</td></tr><tr><td><a href='mailto:" + response.email + "'>";
+            html += response.email + "</a></td></tr><tr><td>Chamber: ";
+            html += response.chamber + "</td></tr><tr><td>Contact: <a href='tel:" + response.contact + "'>";
+            html += response.contact + "</a></td></tr><tr><td><img src=";
+            html += response.partyImg + " style='width:30px'> " + response.party + "</td></tr></table>";
+            $(".details112").html(html);
+            html = "<table class='table'><tr><th class='hidden-xs hidden-sm'>Start Term</th><td>";
+            html += response.termStart + "</td></tr><tr><th class='hidden-xs hidden-sm'>End Term</th><td>";
+            html += response.termEnd + "</td></tr><tr><th class='hidden-xs hidden-sm'>Term</th><td class='hidden-xs hidden-sm'><div class='progress'><div class='progress-bar progress-bar-success' role='progressbar' aria-valuenow=";
+            html += response.term + " aria-valuemin='0' aria-valuemax='100' style='width:" + response.term + "%;'>" + response.term + "%</div></div></td></tr><tr><th class='hidden-xs hidden-sm'>Office</th><td>";
+            html += response.office + "</td></tr><tr><th class='hidden-xs hidden-sm'>State</th><td>";
+            html += response.state + "</td></tr><tr><th class='hidden-xs hidden-sm'>Fax</th><td><a href='fax:" + response.fax + "'>";
+            html += response.fax + "</a></td></tr><tr><th class='hidden-xs hidden-sm'>Birthday</th><td>";
+            html += response.birthday + "</td></tr><tr><th class='hidden-xs hidden-sm'>Social Links</th><td class='socialLink'>";
+            if (response.twitter != "N.A.") {
+                html += "<a href='http://twitter.com/" + response.twitter + "'><img src='./img/t.png' style='width:20px'></a>";
+            }
+            if (response.facebook != "N.A.") {
+                html += "<a href='http://www.facebook.com/" + response.facebook + "'><img src='./img/f.png' style='width:20px'></a>";
+            }
+            if (response.website != "N.A.") {
+                html += "<a href='" + response.website + "'><img src='./img/w.png' style='width:20px'></a>";
+            }
+            html += "</td></table>"
+            $(".details12").html(html);
+            html = "<table class='table'><caption><h4 style='color:#333 !important'>Committees</h4></caption><tr><th>Chamber</th><th>Committee ID</th><th class='hidden-xs hidden-sm'>Name</th></tr>";
+            
+            $.each(response.commInfo, function(index, text) {
+                html += "<tr><td>" + text.chamber + "</td><td>" + text.committee_id + "</td><td class='hidden-xs hidden-sm'>" + text.name + "</td></tr>";
+            });
+            html += "</table>";
+            $(".details21").html(html);
+            html = "<table class='table'><caption><h4 style='color:#333 !important'>Bills</h4></caption><tr><th>Bill ID</th><th class='hidden-xs hidden-sm'>Title</th><th class='hidden-xs hidden-sm'>Chamber</th><th class='hidden-xs hidden-sm'>Bill Type</th><th class='hidden-xs hidden-sm'>Congress</th><th>Link</th></tr>";
+            
+            $.each(response.billInfo, function(index, text) {
+                html += "<tr><td>" + text.bill_id + "</td><td class='hidden-xs hidden-sm'>" + text.title + "</td><td class='hidden-xs hidden-sm'>" + text.chamber + "</td><td class='hidden-xs hidden-sm'>" + text.bill_type + "</td><td class='hidden-xs hidden-sm'>" + text.congress + "</td><td><a href='" + text.link + "'>Link</a></td></tr>";
+            });
+            html += "</table>";
+            $(".details22").html(html);
+        }
+
+        $("#legiCaro, #byLegi").on("click", ".details", function() {
+            $.when(displayDetails($(this).attr("id"))).done(function(response) {                
+                displayDetailsTable(response);
+                if (localStorage.getItem("legi_" + response.bioguide_id)) {
+                    $("#legiFavorite").html("<i class='fa fa-star' aria-hidden='true'></i>");
+                }
+                else {
+                    $("#legiFavorite").html("<i class='fa fa-star-o' aria-hidden='true'></i>");
+                }
+                localInfo = response;
+                $("#legiCaro").carousel(1);
+                $("#legiCaro").carousel("pause");
+                $("#leftNavi a[href='#legislators']").tab('show');
+            });
+            
+        });
+
+        $("#legiFavorite").on("click", function() {
+            $($(this).children("i")).toggleClass('fa-star fa-star-o');
+            if (localStorage.getItem("legi_" + localInfo.bioguide_id)) {
+                localStorage.removeItem("legi_" + localInfo.bioguide_id);
+            }
+            else {
+                localStorage.setItem("legi_" + localInfo.bioguide_id, JSON.stringify(localInfo));
+            }
+        });
+
+        $("#toLegiList").on("click", function() {
+            $("#legiCaro").carousel("prev");
+            $("#legiCaro").carousel("pause");
+        });
+        function displayDetailsBills(idSearch) {
+            return $.ajax({
+                type: "GET",
+                url: "http://hwcsci571.rkhkam8tip.us-west-1.elasticbeanstalk.com/myCongressPageAPI_callback.php",
+                dataType: "jsonp",
+                data: {
+                    type: "bills",
+                    flag: "details",
+                    detail: idSearch
+                }
+            }); 
+        }
+
+        function displayDetailsTableBills(response) {
+            var html = "<table class='table' style='margin-bottom:90px;'><tr><th>Bill ID</th><td>";
+            html += response.bill_id + "</td></tr><tr><th class='hidden-xs hidden-sm'>Title</th><td class='hidden-xs hidden-sm'>";
+            html += response.title + "</td></tr><tr><th>Bill Type</th><td>";
+            html += response.type + "</td></tr><tr><th>Sponsor</th><td>";
+            html += response.sponsor + "</td></tr><th>Chamber</th><td>";
+            html += response.chamber + "</td></tr><tr><th>Status</th><td>";
+            html += response.status + "</td></tr><tr><th>Introdued On</th><td>";
+            html += response.introduced_on + "</td></tr><tr><th>Congress URL</th><td><a href='";
+            html += response.congressURL + "'>URL</a></td></tr><tr><th>Version Status</th><td>";
+            html += response.verStatus + "</td></tr><tr><th>Bill URL</th><td><a href='";
+            html += response.billURL + "'>Link</a></td></tr></table>"
+            $("#billDetailLeft").html(html);
+            html = "<object width='100%' height='100%' type='application/pdf' data=" + response.billURL + "></object>";
+            $("#billDetailRight").html(html);
+
+        }
+
+        $("#billCaro, #byBills").on("click", ".details", function() {
+            $.when(displayDetailsBills($(this).attr("id"))).done(function(response) {               
+                displayDetailsTableBills(response);
+                if (localStorage.getItem("bill_" + response.bill_id)) {
+                    $("#billFavorite").html("<i class='fa fa-star' aria-hidden='true'></i>");
+                }
+                else {
+                    $("#billFavorite").html("<i class='fa fa-star-o' aria-hidden='true'></i>");
+                }
+                localInfo = response;
+                $("#billCaro").carousel(1);
+                $("#billCaro").carousel("pause");
+                $("#leftNavi a[href='#bills']").tab('show');
+            });
+            
+        });
+        $("#billFavorite").on("click", function() {
+            $($(this).children("i")).toggleClass('fa-star fa-star-o');
+            if (localStorage.getItem("bill_" + localInfo.bill_id)) {
+                localStorage.removeItem("bill_" + localInfo.bill_id);
+            }
+            else {
+                localStorage.setItem("bill_" + localInfo.bill_id, JSON.stringify(localInfo));
+            }
+        });
+        $("#toBillList").on("click", function() {
+            $("#billCaro").carousel("prev");
+            $("#billCaro").carousel("pause");
+        });
+        $("#leftNavi a[href='#legislators']").on("click", function() {
+            $("#legiCaro").carousel(0);
+            $("#legiCaro").carousel("pause");
+        });
+        $("#leftNavi a[href='#bills']").on("click", function() {
+            $("#billCaro").carousel(0);
+            $("#billCaro").carousel("pause");
+        });
+        $("#committees table").on("click", ".commFavo", function() {
+            var info = (this.id).split("_");
+            var infoJSON = '{"chamberImg":"' + info[0] + '","chamber":"' + info[1] + '","committee_id":"' + info[2] + '","name":"' + info[3] + '","parent_comm":"' + info[4] + '","sub_comm":"' + info[5] + '"}';
+            $($(this).children("i")).toggleClass('fa-star fa-star-o');
+            if (localStorage.getItem("comm_" + info[2])) {
+                localStorage.removeItem("comm_" + info[2]);
+            }
+            else {
+                localStorage.setItem("comm_" + info[2], infoJSON);
+            }
+        });
+        $("#leftNavi a[href='#committees']").on("click", function() {
+            var commFavo = document.getElementsByClassName("commFavo");
+            for (var i = 0; i < commFavo.length; i++) {
+                var id = (commFavo[i].id).split("_")[2];
+                if (localStorage.getItem("comm_" + id)) {
+                    commFavo[i].innerHTML = "<i class='fa fa-star' aria-hidden='true'></i>";
+                }
+                else {
+                    commFavo[i].innerHTML = "<i class='fa fa-star-o' aria-hidden='true'></i>";
+                }
+            }
+        });
+        $("#leftNavi a[href='#favorites']").on("click", function() {
+            var htmlLegi = "<tr><th width='10.5%'></th><th width='10%'>Image</th><th width='9.5%'>Party</th><th width='12%'>Name</th><th width='12%'>Chamber</th><th width='8%'>State</th><th width='26%'>Email</th><th width='12%'></th></tr>";
+            var htmlBill = "<tr><th width='7%'></th><th width='11%'>Bill ID</th><th width='9%'>Bill Type</th><th width='20%'>Title</th><th width='10%'>Chamber</th><th width='15%'>Introducted On</th><th width='15%'>Sponsor</th><th width='13%'></th></tr>";
+            var htmlComm = "<tr><th width='7%'></th><th width='9%'>Chamber</th><th width='10%'>Committee ID</th><th width='51%'>Name</th><th width='13%'>Parent Committee</th><th width='10%'>Sub Committee</th></tr>";
+            if (localStorage.length != 0) {
+                for (var i = 0; i < localStorage.length; i++) {
+                    var key = localStorage.key(i);
+                    var type = key.split("_");
+                    var info = JSON.parse(localStorage.getItem(key));
+                    if (type[0] == "legi") {
+                        var name = info.fullName.split(" ");
+                        htmlLegi += "<tr><td><button id=" + key + " class='btn btn-default delete'><span class='glyphicon glyphicon-trash'></span></button></td><td><img src='https://theunitedstates.io/images/congress/225x275/" + info.bioguide_id + ".jpg' style='width:35px;' style='width:35px'></td><td><img src='" + info.partyImg + "' style='width:30px'></td><td>" + name[1] + " " + name[2] + "</td><td class='" + info.chamber + "'><img src='" + info.chamberImg + "'> " + info.chamber + "</td><td>" + info.state + "</td><td><a href='mailto:" + info.email + "'>" + info.email + "</a></td><td><button id='" + info.bioguide_id + "' class='btn btn-primary details' style='margin:2px 0 0 0;'>View Details</button></td></tr>";                       
+                    }
+                    else if (type[0] == "bill") {
+                        htmlBill += "<tr><td><button id=" + key + " class='btn btn-default delete'><span class='glyphicon glyphicon-trash'></span></button></td><td>" + info.bill_id + "</td><td>" + info.type + "</td><td>" + info.title + "</td><td class='" + info.chamber + "'><img src='" + info.chamberImg + "'> " + info.chamber + "</td><td>" + info.introduced_on + "</td><td>" + info.sponsor + "</td><td><button id='" + info.bill_id + "' class='btn btn-primary details' style='margin:2px 0 0 0;'>View Details</button></td></tr>";
+                    }
+                    else {
+                        htmlComm += "<tr><td><button id=" + key + " class='btn btn-default delete'><span class='glyphicon glyphicon-trash'></span></button></td><td class='" + info.chamber + "'><img src='" + info.chamberImg + "'> " + info.chamber + "</td><td>" + info.committee_id + "</td><td>" + info.name + "</td><td>" + info.parent_comm + "</td><td>" + info.sub_comm + "</td></tr>";
+                    }
+                }
+            }
+            $("#legiFavoTable").html(htmlLegi);
+            $("#billFavoTable").html(htmlBill);
+            $("#commFavoTable").html(htmlComm);
+        });
+
+        $("#favorites").on("click", ".delete", function() {
+            localStorage.removeItem($(this).attr("id"));
+            $(this).parent().parent().remove();
+        });
+    });
+</script>
+</body>
+</html>
