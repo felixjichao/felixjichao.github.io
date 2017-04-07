@@ -660,7 +660,7 @@
         var promise;
         var shareData = {
             async: function() {
-                var url = "http://hwcsci571.rkhkam8tip.us-west-1.elasticbeanstalk.com/myCongressPageAPI_callback.php?type=legislators&flag=state&detail=no&callback=JSON_CALLBACK";
+                var url = "https://hwcsci571.rkhkam8tip.us-west-1.elasticbeanstalk.com/myCongressPageAPI_callback.php?type=legislators&flag=state&detail=no&callback=JSON_CALLBACK";
                 $sce.trustAsResourceUrl(url);
                 if (!promise) {
                     promise = $http.jsonp(url, {jsonpCallbackParam: 'callback'}).success(function(response) {
@@ -692,7 +692,7 @@
     });
 
     app.controller("billActive", function($scope, $http, $sce) {
-        var url = "http://hwcsci571.rkhkam8tip.us-west-1.elasticbeanstalk.com/myCongressPageAPI_callback.php?type=bills&flag=active&detail=no&callback=JSON_CALLBACK";
+        var url = "https://hwcsci571.rkhkam8tip.us-west-1.elasticbeanstalk.com/myCongressPageAPI_callback.php?type=bills&flag=active&detail=no&callback=JSON_CALLBACK";
         $sce.trustAsResourceUrl(url);
         $http.jsonp(url, {jsonpCallbackParam: 'callback'}).success(function(response) {
             $scope.billsActive = response;
@@ -700,7 +700,7 @@
         });
     });
     app.controller("billNew", function($scope, $http, $sce) {
-        var url = "http://hwcsci571.rkhkam8tip.us-west-1.elasticbeanstalk.com/myCongressPageAPI_callback.php?type=bills&flag=new&detail=no&callback=JSON_CALLBACK";
+        var url = "https://hwcsci571.rkhkam8tip.us-west-1.elasticbeanstalk.com/myCongressPageAPI_callback.php?type=bills&flag=new&detail=no&callback=JSON_CALLBACK";
         $sce.trustAsResourceUrl(url);
         $http.jsonp(url, {jsonpCallbackParam: 'callback'}).success(function(response) {
             $scope.billsNew = response;
@@ -725,7 +725,7 @@
         var promise;
         var shareData = {
             async: function() {
-                var url = "http://hwcsci571.rkhkam8tip.us-west-1.elasticbeanstalk.com/myCongressPageAPI_callback.php?type=committees&flag=all&detail=no&callback=JSON_CALLBACK";
+                var url = "https://hwcsci571.rkhkam8tip.us-west-1.elasticbeanstalk.com/myCongressPageAPI_callback.php?type=committees&flag=all&detail=no&callback=JSON_CALLBACK";
                 $sce.trustAsResourceUrl(url);
                 if (!promise) {
                     promise = $http.jsonp(url, {jsonpCallbackParam: 'callback'}).success(function(response) {
@@ -785,7 +785,7 @@
         function displayDetails(idSearch) {
             return $.ajax({
                 type: "GET",
-                url: "http://hwcsci571.rkhkam8tip.us-west-1.elasticbeanstalk.com/myCongressPageAPI_callback.php",
+                url: "https://hwcsci571.rkhkam8tip.us-west-1.elasticbeanstalk.com/myCongressPageAPI_callback.php",
                 dataType: "jsonp",
                 data: {
                     type: "legislators",
@@ -874,7 +874,7 @@
         function displayDetailsBills(idSearch) {
             return $.ajax({
                 type: "GET",
-                url: "http://hwcsci571.rkhkam8tip.us-west-1.elasticbeanstalk.com/myCongressPageAPI_callback.php",
+                url: "https://hwcsci571.rkhkam8tip.us-west-1.elasticbeanstalk.com/myCongressPageAPI_callback.php",
                 dataType: "jsonp",
                 data: {
                     type: "bills",
